@@ -1,0 +1,152 @@
+body {
+    font-family: "Microsoft YaHei", "微软雅黑", "Hiragino Sans GB", sans-serif;
+    background-color: #e9e3d6;
+    padding-bottom: 100px;
+}
+
+.clearfloat:after {
+    visibility: hidden;
+    display: block;
+    clear: both;
+    content: "";
+    height: 0;
+}
+
+.clearfloat {
+    zoom: 1;
+}
+
+.bg {
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+}
+
+.content {
+    width: 100%;
+}
+
+.content > div {
+    float: left;
+}
+
+.left {
+    width: 100px;
+    left: 10px;
+    position: absolute;
+}
+
+.right {
+    width: 100px;
+    right: 0;
+    position: absolute;
+    padding-top: 100px;
+}
+
+.vertical {
+    position: absolute;
+    top: 0;
+    right: 40px;
+    width: 2px;
+    height: 820px;
+    background-color: #cfa972;
+}
+
+.left li {
+    position: relative;
+    height: 80px;
+    margin-top: 20px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    right: 11px;
+    cursor: pointer;
+    transform-origin: 50% 50%;
+    animation: logo-close .3s linear;
+    animation-fill-mode: forwards;
+}
+
+.abbr {
+    color: #59493f;
+    position: absolute;
+    top: 10px;
+}
+
+.active.logo {
+    animation: logo-open .3s linear;
+    animation-fill-mode: forwards;
+}
+
+.logo-close.logo {
+    animation: logo-close .3s linear;
+    animation-fill-mode: forwards;
+}
+
+.logo-open.logo {
+    animation: logo-open .3s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes logo-open {
+    0% {
+        transform: scale(1, 1);
+    }
+    100% {
+        transform: scale(1.3, 1.3);
+    }
+}
+
+@keyframes logo-close {
+    0% {
+        transform: scale(1.3, 1.3);
+    }
+    100% {
+        transform: scale(1, 1);
+    }
+}
+
+.middle {
+    position: absolute;
+    top: 100px;
+    left: 120px;
+    background-color: #fff;
+}
+
+#iframe {
+    height: 1000px;
+    border: none;
+}
+
+.vertical-name > p {
+    font-size: 18px;
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+    line-height: 40px;
+    text-align: center;
+    background-color: #967161;
+    border-radius: 20px;
+}
+
+.plate {
+    display: none;
+}
+
+.plate > p {
+    font-size: 14px;
+    width: 14px;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+    border-radius: 17px;
+    cursor: pointer;
+    color: #967161;
+}
+
+.plate > p.active {
+    color: #fff;
+    background-color: #967161;
+}
