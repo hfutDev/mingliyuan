@@ -1,0 +1,31 @@
+.breadcrumbs {
+    color: #6e6d6d;
+    font-size: 16px;
+}
+
+.link-group {
+    width: 618px;
+    min-height: 800px;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #dcdcdc;
+}
+
+.link-group-title {
+    font-size: 18px;
+    color: #252525;
+}
+
+.hehehe {
+    list-style-type: square;
+    line-height: 50px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.hehehehe {
+    margin: 10px 0;
+    text-indent: 2em;
+    font-size: 16px;
+    line-height: 28px;
+}
