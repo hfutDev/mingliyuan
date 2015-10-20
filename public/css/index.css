@@ -1,0 +1,63 @@
+/*
+ *css for index page
+ *Made by hfut online
+ *@author yu
+ */
+body{-webkit-tap-highlight-color: rgba(0, 0, 0, 0);}
+
+.yu-main{width:100%;height:100%;}
+.main{width:100%;height:100%;}
+.main-section{width:100%;height:100%;overflow-y: scroll;}
+
+.welcome_text{color:white;font-size:1.8rem;padding-top:5.5rem;padding-right:2.2rem;text-align:right;width:68%;float:right;opacity:0.8;}
+.welcome_text span{float:right;}
+.main_div{position:absolute;left:0;bottom:0;height:2.5rem;width:100%;}
+.main_next{margin:0 auto;width:5rem;height:2.5rem;border-radius:2.5rem 2.5rem 0 0;-webkit-border-radius:2.5rem 2.5rem 0 0;-moz-border-radius:2.5rem 2.5rem 0 0;background-color:#ff5669;}
+.main_next img{width:2.2rem;height:1.1rem;margin-left:1.36rem;margin-right:1.3rem;margin-top:1rem;}
+
+.main_rect{background-size: cover;width:100%;height:100%;position: relative;}
+
+/*.main_welcome{background-image:url(../images/bg_welcome.png);}
+.main_sixiang{background-image:url(../images/bg_sixiang.png);}
+.main_biaobing{background-image:url(../images/bg_biaobing.png);}
+.main_hanmo{background-image:url(../images/bg_hanmo.png);}
+.main_yantu{background-image:url(../images/bg_yantu.png);}
+.main_zixun{background-image:url(../images/bg_zixun.png);}
+.main_banquan{background-image:url(../images/bg_banquan.png);}*/
+
+/*增加下面一段便于循环输出*/
+/*.main_index1{background-image:url(../images/bg_sixiang.png);}
+.main_index2{background-image:url(../images/bg_biaobing.png);}
+.main_index3{background-image:url(../images/bg_hanmo.png);}
+.main_index4{background-image:url(../images/bg_yantu.png);}
+.main_index5{background-image:url(../images/bg_zixun.png);}
+.main_index6{background-image:url(../images/bg_banquan.png);}*/
+/*结束*/
+
+.main_text{position:absolute;opacity: 0.8;bottom:0;height:40%;width:100%;left:0;z-index:1;text-align:center;display:table;}
+
+/*@media screen and (min-width:120px) and (max-width:340px){
+	.main_rect .color_banquan h4{line-height:1.8rem;}
+	.main_rect .main_text h1{margin-top: 0;margin-bottom:0.8rem;font-size:1.8rem;}
+	.main_rect .main_text h4, .main_rect .color_banquan h4{font-size:1.1rem;margin-bottom:0.3rem;}
+}*/
+.main_text h1{color:white;margin-top: 0;margin-bottom: 0;}
+.main_text h1 img{width:0.8rem;height:1.7rem;margin-top:-0.3rem;}
+.main_text h4{font-size:1.18rem;font-family: "FZLTCXHJW";color:white;}
+ 
+.rect_banquan{opacity:1;display:table;}
+.main_text>div, .rect_banquan>div{display: table-cell;vertical-align:middle;}
+.color_banquan{background-color:#b31a25;}
+.color_banquan h4{line-height:2.2rem;}
+
+
+/*颜色渐变效果*/
+/*首页的菜单弹出按钮颜色变化失效*/
+.color_transition{transition: background-color 1s ease-in-out;-moz-transition: background-color 1s ease-in-out;-webkit-transition: background-color 1s ease-in-out;-o-transition: background-color 1s ease-in-out;}
+
+
+.swipe {overflow: hidden;visibility: hidden; }
+.swipe-wrap {overflow: hidden; /*position: relative;*/}
+.swipe-wrap > div { float:left; width:100%;  /*position: relative;*/}
+
+/*.swiper-container{z-index: 1000;}*/

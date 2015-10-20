@@ -1,0 +1,83 @@
+<?php
+  function getZixun($uid){
+    $zixunMapper = new Application_Model_zixunMapper();
+    $get = $zixunMapper->getByUid($uid,0);
+    if ($get) {
+      $num = count($get);
+    }
+    else {
+      $num = 0;
+    }
+    return $num;
+  }
+?>
+
+      <div class="content-box"><!-- Start Content Box -->
+
+  <div class="content-box-header">
+
+    <h3>用户管理</h3>
+
+  </div> <!-- End .content-box-header -->
+
+  <div class="content-box-content">
+
+    <div class="tab-content default-tab" id="tab1">
+      <!-- This is the target div. id must match the href of this div's tab -->
+    <table>
+
+    <thead>
+      <tr>
+        <?php echo "<th><input class=\"check-all\" type=\"checkbox\" /></th>";?>
+        <th>用户名</th>
+        <th>级别</th>
+        <th>发帖量</th>
+        <th>密码</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <?php
+        foreach ($this->paginator_user as $key => $value) {
+          echo "<tr><td><input type=\"checkbox\" value='".$value['uid']."' /></td>";
+          echo '<td><a href="javascript:(void);">'.$value["uname"].'</a></td><td>普通管理员</td><td>'.getZixun($value['uid']).'</td><td>'.$value["pwd"].'</td>';
+          echo "<td><a href=\"#\" data-uid=\"".$value['uid']."\" class='editUser' title=\"编辑\"><img src=\"/images/admin/icons/pencil.png\" alt=\"编辑\" /></a>　";
+          echo "<a href=\"#\" data-uid='".$value['uid']."' title=\"删除\" class=\"delUser\"><img src=\"/images/admin/icons/cross.png\" alt=\"删除\" /></a>";
+          echo "</td></tr>";
+        }
+        $paginator_all=$this->paginator_all;
+      ?>
+    </tbody>
+
+    <tfoot>
+        <tr>
+          <td colspan="6">
+            <div class="bulk-actions align-left">
+              <?php
+                if ($this->session->type == 1) echo"
+                <input type=\"submit\" class=\"button del\" value=\"删除\">";
+              ?>
+            </div>
+
+            <div class="pagination">
+              <?php
+                echo $this->paginationControl($this->paginator_user,
+                'Elastic',//页码样式 
+                'admin/pagination_control.phtml'//页码模板
+                );
+              ?>
+            </div> <!-- End .pagination -->
+            <div class="clear"></div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+
+    </div> <!-- End #tab1 -->      
+
+  </div> <!-- End .content-box-content -->
+
+</div> <!-- End .content-box -->  
+  <script type="text/javascript" src="/js/admin/jquery.artDialog.js?skin=green"></script>
+  <script type="text/javascript" src="/js/admin/user.js"></script>

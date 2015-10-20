@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>明理苑后台管理系统</title>
+<link rel="stylesheet" type="text/css" media="screen" href="/css/admin/reset.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/admin/style.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="/css/admin/invalid.css" />
+<script type="text/javascript" src="/js/jquery.js"></script>
+<script type="text/javascript" src="/js/simpla.jquery.configuration.js"></script>
+<script type="text/javascript" src="/js/facebox.js"></script>
+
+</head>
+  <body>
+  <div id="body-wrapper"> <!-- Wrapper for the radial gradient background -->
+
+    <div id="sidebar"><div id="sidebar-wrapper"> <!-- Sidebar with logo and menu -->
+
+      <h1 id="sidebar-title"><a href="#">明理苑后台管理系统</a></h1>
+
+      <!-- Logo (221px wide) -->
+      <a href="/admin"><img id="logo" src="/images/admin/logo.png" alt="logo" /></a>
+
+      <!-- Sidebar Profile links -->
+      <div id="profile-links">
+        <a href="#" title=""><?=$this->session->uname?></a> | <?=$this->session->admin?><br /><br />
+        <a href="/index" title="返回前台" target="_blank">返回前台</a> | <a href="/login/logout" title="注销">注销</a>
+      </div>        
+
+      <ul id="main-nav">  <!-- Accordion Menu -->
+
+        <li>
+          <a href="/admin" class="nav-top-item no-submenu menu-index">
+            总体概览
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="nav-top-item menu-writearticle">内容发布</a>
+          <ul>
+            <li><a href="/admin/writearticle" class="menu-writearticle">发表文章</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <?php 
+            if ($this->session->type == 1) {
+              echo "<a href=\"#\" class=\"nav-top-item no-submenu menu-module menu-editarticle\">内容管理</a>";
+              echo "<ul>";
+              if ($this->arrModule) {
+               foreach ($this->arrModule as $key => $value) {
+                 echo '<li><a href="/admin/module/mid/'.$value['module_id'].'" class="module-'.$value['module_id'].'">'.$value['module_name'].'</a></li>';
+               }
+              }
+              echo "</ul>";
+            }
+            else {
+              echo "<a href=\"/admin/myarticle\" class=\"nav-top-item no-submenu menu-myarticle\">文章管理</a>";
+            }
+          ?>
+        </li>
+
+        <?php if ($this->session->type == 1) { ?>
+        <li>
+          <a href="#" class="nav-top-item menu-usermanager menu-basemanage">
+            网站管理
+          </a>
+          <ul>
+            <li><a href="/admin/usermanager" class="menu-usermanager">用户管理</a></li>
+            <li><a href="/admin/basemanage" class="menu-basemanage">板块管理</a></li>
+          </ul>
+        </li><?php }?>
+
+      </ul> <!-- End #main-nav -->
+
+    </div></div> <!-- End #sidebar -->
+    <div id="main-content"> <!-- Main Content Section with everything -->
+
+      <!-- Page Head -->
+      <!-- <h2>明理苑后台管理系统</h2> -->
+      <!-- <p id="page-intro">What would you like to do?</p> -->
+
+      <!-- Start Notifications -->
+
+      <ul class="shortcut-buttons-set">
+
+        <li>
+          <a class="shortcut-button" href="/admin/writearticle">
+            <span>
+              <img src="/images/admin/icons/paper_content_pencil_48.png" alt="icon" /><br />发表文章
+            </span>
+          </a>
+        </li>
+        <li>
+          <a class="shortcut-button writeimg" href="#">
+            <span>
+              <img src="/images/admin/icons/paper_content_pencil_48.png" alt="icon" /><br />上传图片
+            </span>
+          </a>
+        </li>
+          <?php
+            if ($this->session->type == 1) {
+              echo '<li><a class="shortcut-button addmodule" href="#"><span><img src="/images/admin/icons/pencil_48.png" alt="icon" /><br />添加板块</span></a></li>';
+              echo '<li><a class="shortcut-button addimg" href="#"><span><img src="/images/admin/icons/image_add_48.png" alt="icon" /><br />板块封面</span></a></li>';
+              echo "<li><a class=\"shortcut-button adduser\" href=\"#\"><span><img src=\"/images/admin/icons/user_48.png\" alt=\"icon\" /><br />添加用户</span></a></li>";
+            }else {
+              echo '<li><a class="shortcut-button modifypwd" href="#"><span><img src="/images/admin/icons/key_48.png" alt="icon" /><br />修改密码</span></a></li>';
+            }
+        ?>
+        
+      </ul><!-- End .shortcut-buttons-set -->
+
+      <div class="clear"></div> <!-- End .clear -->
+      <?php echo $this->layout()->content; ?>
+
+    <div class="clear"></div>
+
+    <div class="clear"></div>
+
+    <div id="footer">
+      <small> <!-- Remove this notice or replace it with whatever you want -->
+      	CopyRight &copy; <?php echo date("Y"); ?> <a href="http://newmly.hfutonline.net" target="_blank">明理苑网络文化工作室</a> &nbsp;|&nbsp; Powered by  <a href="http://online.hfut.edu.cn" target="_blank">工大学子</a> <a href="#" style="float: right;">回到顶部</a>
+      </small>
+    </div><!-- End #footer -->
+    
+  </div> <!-- End #main-content -->
+</div>
+<script type="text/javascript">
+	var action = "index";
+	action = "<?=Zend_Controller_Front::getInstance() -> getRequest() -> getActionName();?>";
+	$(".menu-"+action).addClass("current");
+	if (action == "module") {
+		$(".module-"+"<?=$this->module_id?>").addClass("current");
+	}
+</script>
+<script type="text/javascript" src="/js/admin/jquery.artDialog.js?skin=green"></script>
+<?php
+ if ($this->session->type != 1) {
+  echo "<script type=\"text/javascript\" src=\"/js/admin/modifypwd.js\"></script>";
+ }
+?>
+ </body>
+</html>

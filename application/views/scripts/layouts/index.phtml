@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>明理苑</title>
+    <link rel="stylesheet" href="/css/index/reset.css"/>
+    <link rel="stylesheet" href="/css/index/public.css"/>
+    <?php
+      $action = Zend_Controller_Front::getInstance() -> getRequest() -> getActionName();
+      if($action == "index"){
+        echo "<link rel=\"stylesheet\" href=\"/css/index/index.css\"/>";
+      }elseif ($action == "article") {
+        echo "<link rel=\"stylesheet\" href=\"/css/index/third.css\"/>";
+      }else{
+        echo "<link rel=\"stylesheet\" href=\"/css/index/second.css\"/>";
+      }
+    ?>
+</head>
+<body>
+<div class="top-band">
+    <div class="top-band-content">
+        <!-- <a href="#">登录</a> -->
+        <a href="http://newmly.hfutonline.net" class="right">明理苑网络文化工作室</a>
+        <a href="http://online.hfut.edu.cn" class="right">工大学子</a>
+    </div>
+</div>
+
+<div class="nav">
+    <div class="nav-content">
+        <ul>
+            <li>
+                <a href="#">硅谷精英</a>
+                <a href="#">人人空间</a>
+            </li>
+            <li>
+                <a href="#">红色星动</a>
+                <a href="#">先声夺人</a>
+            </li>
+            <li>
+                <a href="#">创新中国</a>
+                <a href="#">科学绿洲</a>
+            </li>
+            <li>
+                <a href="#">绿色在线</a>
+                <a href="#">人文天空</a>
+            </li>
+            <li>
+                <a href="#">知艺星空</a>
+                <a href="#">心理健康</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div id="fsD0" class="focus" style="width: 1000px;height: 170px;margin: 0 auto;">
+    <div id="D1pic0" class="fPic">
+        <div class="fcon" style="display: none;">
+            <img src="/images/slider.jpg" style="opacity:1;width: 1000px;height: 170px;">
+        </div>
+
+        <div class="fcon" style="display: none;">
+            <img src="/images/02.jpg" style="opacity:1;width: 1000px;height: 170px;">
+        </div>
+
+        <div class="fcon" style="display: none;">
+            <img src="/images/slider.jpg" style="opacity:1;width: 1000px;height: 170px;">
+        </div>
+
+        <div class="fcon" style="display: none;">
+            <img src="/images/slider.jpg" style="opacity:1;width: 1000px;height: 170px;">
+        </div>
+    </div>
+    <div class="fbg">
+        <div class="D1fBt" id="D1fBt0">
+            <a href="javascript:void(0)" hidefocus="true"><i>1</i></a>
+            <a href="javascript:void(0)" hidefocus="true"><i>2</i></a>
+            <a href="javascript:void(0)" hidefocus="true"><i>3</i></a>
+            <a href="javascript:void(0)" hidefocus="true"><i>4</i></a>
+        </div>
+    </div>
+</div>
+
+<?php echo $this->layout()->content; ?>
+
+<div class="fuck-footer">
+    <img src="/images/fuck.jpg" alt=""/>
+</div>
+
+<div class="footer">
+    <p>Copyright &copy; <?=date("Y")?> 党委学生工作部 明理苑大学生网络文化工作室 All Rights Reserved. Powered By <a href="http://online.hfut.edu.cn" style="color:#fff;" target="_blank">工大学子</a>
+</div>
+
+<script src="/js/index/jquery.min.js"></script>
+<script src="/js/index/koala.min.1.5.js"></script>
+<script src="/js/index/terminator2.2.min.js"></script>
+<script src="/js/index/index.js"></script>
+</body>
+</html>

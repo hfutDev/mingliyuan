@@ -1,0 +1,50 @@
+<div class="content clearfloat">
+    <div class="content-left">
+    <p class="breadcrumbs">>> <a href="/" style="color:#6E6D6D;">首页</a> > <?=$this->keyword?> </p>
+        <div class="link-group">
+            <ul>
+                <?php
+                  if ($this->paginator_articleinfo) {
+                    foreach ($this->paginator_articleinfo as $key => $value) {
+                      echo "<li>";
+                      echo "<a href=\"/index/article/aid/" .$value['id']. "\">".$value['title']."</a>";
+                      echo "<span>".explode(" ", $value['addtime'])[0]."</span>";
+                      echo "</li>";
+                      if ($key == 4 || $key == 9 || $key == 14) {
+                        echo "<li></li>";
+                      }
+                    }
+                  }
+                ?>
+            </ul>
+
+            <li class="page">
+                <?php
+                  if (isset($this->paginator_articleinfo)) {
+                    echo $this->paginationControl($this->paginator_articleinfo,
+                    'Elastic',//页码样式 
+                    'index/pagination_control.phtml'//页码模板
+                    );
+                  }
+                ?>
+            </li>
+        </div>
+    </div>
+    <div class="content-right">
+    <form action="/index/search"><input class="search" name="kw" type="text" placeholder="搜索"/></form>
+        <div class="pingg">
+            <p class="pingg-title">最近文章</p>
+            <ul class="pingg-link">
+                <?php
+                  if ($this->newArticle) {
+                    for ($i=0; $i < count($this->newArticle); $i++) { 
+                      echo "<li>";
+                      echo "<a href=\"/index/article/aid/" .$this->newArticle[$i]['id']. "\">" . $this->newArticle[$i]['title'] . "</a>";
+                      echo "</li>";
+                    }
+                  }
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>

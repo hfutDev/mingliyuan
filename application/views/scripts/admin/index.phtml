@@ -1,0 +1,48 @@
+<?php
+date_default_timezone_set('Asia/Shanghai');
+  function getMod($mid){
+    $moduleMapper = new Application_Model_moduleMapper();
+    $mod = $moduleMapper->getById($mid);
+    if ($mod) {
+      return $mod['module_name'];
+    }
+  }
+?>
+
+      <div class="content-box"><!-- Start Content Box -->
+        <div class="content-box-header">
+          <h3>最近发布文章</h3>
+          <a href="/admin/module" style="font-size:16px;padding:11px 15px;float:right;">更多»</a>
+        </div> <!-- End .content-box-header -->
+        <div class="content-box-content">
+
+    <div class="tab-content default-tab" id="tab1">
+      <!-- This is the target div. id must match the href of this div's tab -->
+    <table>
+
+    <thead>
+      <tr>
+        <th>文章标题</th>
+        <th>一级栏目</th>
+        <th>发帖时间</th>
+        <th>作者</th>
+        <th>浏览量</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <?php
+      if ($this->newArticle) {
+        for ($i=0; $i < count($this->newArticle); $i++) {
+          $time = date('Y-m-d',strtotime($this->newArticle[$i]['addtime']));
+          echo '<tr><td><a href="javascript:(void);" title="预览文章">'.$this->newArticle[$i]["title"].'</a></td><td>'.getMod($this->newArticle[$i]["module_id"]).'</td><td>'.$time.'</td><td>'.$this->newArticle[$i]["source"].'</td><td>'.$this->newArticle[$i]["visited"].'</td></tr>';
+        }
+      }
+      ?>
+    </tbody>
+
+    </table>
+
+    </div> <!-- End #tab1 -->      
+        </div> <!-- End .content-box-content -->
+      </div> <!-- End .content-box -->

@@ -1,0 +1,29 @@
+<div class="content clearfloat">
+    <div class="content-left">
+        <p class="breadcrumbs">>> <a href="/" style="color:#6E6D6D;">首页</a> > <?=$this->modulename['module_name']?></p>
+        <div class="link-group">
+            <p class="link-group-title"><?=$this->article['title']?></p>
+            <li class="hehehe">文/<?=$this->article['author']?>&nbsp;&nbsp;<?=explode(" ",$this->article['addtime'])[0]?></li>
+            <div>
+                <?=$this->article['content']?>
+            </div>
+        </div>
+    </div>
+    <div class="content-right">
+        <form action="/index/search"><input class="search" name="kw" type="text" placeholder="搜索"/></form>
+        <div class="pingg">
+            <p class="pingg-title">最近文章</p>
+            <ul class="pingg-link">
+                <?php
+                  if ($this->newArticle) {
+                    for ($i=0; $i < count($this->newArticle); $i++) { 
+                      echo "<li>";
+                      echo "<a href=\"/index/article/aid/" .$this->newArticle[$i]['id']. "\">" . $this->newArticle[$i]['title'] . "</a>";
+                      echo "</li>";
+                    }
+                  }
+                ?>
+            </ul>
+        </div>
+    </div>
+</div>

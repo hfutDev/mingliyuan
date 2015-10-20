@@ -1,0 +1,110 @@
+<div class="content-box"><!-- Start Content Box -->
+
+  <div class="content-box-header">
+
+    <h3>我发布的文章</h3>
+
+    <ul class="content-box-tabs">
+      <li><a href="" title="所有文章" id="alltab" class="default-tab">所有文章</a></li>
+    </ul>
+
+    <div class="clear"></div>
+
+  </div> <!-- End .content-box-header -->
+
+  <div class="content-box-content">
+
+    <!-- 全部文章 -->
+    <div class="tab-content default-tab" id="all">
+
+      <table>
+
+      <thead>
+
+        <tr>
+          <?php
+            if ($this->session->type == 1)
+              echo "<th><input class=\"check-all\" type=\"checkbox\" /></th>";
+          ?>
+          <th>文章标题</th>
+          <th>发帖时间</th>
+          <th>来源</th>
+          <th>文章操作</th>
+        </tr>
+
+      </thead>
+
+      <tbody>
+
+        <?php
+          if ($this->paginator_articleinfo) {
+            foreach ($this->paginator_articleinfo as $key => $value) {
+              echo "<tr>";
+              if ($this->session->type == 1) {
+                echo "<td><input type=\"checkbox\" value='".$value['id']."' /></td>";
+              }
+              echo "<td><a href='#'>".$value['title']."</a></td>";
+              echo "<td>".$value['addtime']."</td>
+                    <td>".$value['source']."</td>
+                    <td><!-- Icons --><a href=\"/admin/editarticle/aid/".$value['id']."\" title=\"编辑\"><img src=\"/images/admin/icons/pencil.png\" alt=\"编辑\" /></a>
+                    <a href=\"#\" data-href='".$value['id']."' title=\"删除\" class=\"delete\"><img src=\"/images/admin/icons/cross.png\" alt=\"删除\" /></a></td>
+              </tr>";
+            }
+            $paginator_all=$this->paginator_all;
+          }
+        ?>
+      
+      </tbody>
+
+      <tfoot>
+        <tr>
+          <td colspan="6">
+            <div class="bulk-actions align-left">
+              <?php
+                if ($this->session->type == 1) echo"
+                <input type=\"submit\" class=\"button\" value=\"删除\">";
+              ?>
+            </div>
+
+            <div class="pagination">
+              <?php
+              if ($this->paginator_articleinfo) {
+                echo $this->paginationControl($this->paginator_articleinfo,
+                'Elastic',//页码样式 
+                'admin/pagination_control.phtml'//页码模板
+                );
+              }
+              ?>
+            </div> <!-- End .pagination -->
+            <div class="clear"></div>
+          </td>
+        </tr>
+      </tfoot>
+
+      </table>
+
+    </div> <!-- End #all -->
+
+
+  </div> <!-- End .content-box-content -->
+
+</div> <!-- End .content-box -->
+      <div class="clear"></div>
+
+      <?php echo $this->layout()->content; ?>
+
+      <div class="clear"></div>
+
+
+      <div id="footer">
+        <small> <!-- Remove this notice or replace it with whatever you want -->
+            CopyRight&copy;<?php echo date("Y"); ?> 合肥工业大学学工部(处)  大学生网络教育发展中心 | Powered by 微言合工大团队 | <a href="#">回到顶部</a>
+        </small>
+      </div><!-- End #footer -->
+      
+    </div> <!-- End #main-content -->
+  </div>
+  <script type="text/javascript" src="/js/admin/jquery.artDialog.js?skin=green"></script>
+<script type="text/javascript" src="/js/admin/article.js"></script>
+</body>
+</html>

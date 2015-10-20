@@ -1,0 +1,175 @@
+
+
+    
+
+      <div class="content-box"><!-- Start Content Box -->
+
+  <div class="content-box-header">
+    <?php
+      if ($this->showCol) {
+        echo "<h3 data-mid='".$this->mid."'>".$this->showModule."</h3>";
+      }
+      else {
+        echo "<h3>板块设置</h3>";
+      }
+    ?>
+
+  </div> <!-- End .content-box-header -->
+
+  <div class="content-box-content">
+
+    <div class="tab-content default-tab" id="tab1">
+      <!-- This is the target div. id must match the href of this div's tab -->
+    <table>
+
+    <thead>
+      <tr>
+        
+        <?php if ($this->type == 'show') {
+        ?>
+        <th>二级板块</th>
+        <?php
+        }else{
+        ?>
+        <th>板块名称</th>
+        <th>首页封面</th>
+        <?php
+        } ?>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <?php
+        
+      if ($this->arrModule&&$this->type != 'show') {//一级板块
+        foreach ($this->arrModule as $key => $value) {
+          echo '<tr><td><a href="/admin/module/mid/'.$value['module_id'].'" data-mid="'.$value['module_id'].'" title="点击查看二级板块">'.$value["module_name"].'</a></td>';
+          if ($value['module_img']) {
+            echo '<td class="module_img"><img src="'.$value["module_img"].'" class="basemanage-img" title="点击查看大图"></td>';
+          }else{
+            echo '<td class="module_img"></td>';
+          }
+          echo "<td><a href=\"#\" data-mid=\"".$value['module_id']."\" class='editbase' title=\"编辑\"><img src=\"/images/admin/icons/pencil.png\" alt=\"编辑\" /></a>　";
+          echo "<a href=\"#\" data-mid='".$value['module_id']."' title=\"删除\" class=\"delbase\"><img src=\"/images/admin/icons/cross.png\" alt=\"删除\" /></a>";
+          echo "</td></tr>";
+        }
+      }
+      if ($this->showCol) {//二级板块
+        foreach ($this->showCol as $key => $value) {
+          echo '<tr><td><a href="javascript:(void);" data-cid="'.$value['column_id'].'" title="">'.$value["column_name"].'</a></td>';
+          echo "<td><a href=\"#\" data-cid=\"".$value['column_id']."\" class='editcol' title=\"编辑\"><img src=\"/images/admin/icons/pencil.png\" alt=\"编辑\" /></a>　";
+          echo "<a href=\"#\" data-cid='".$value['column_id']."' title=\"删除\" class=\"delcol\"><img src=\"/images/admin/icons/cross.png\" alt=\"删除\" /></a>";
+          echo "</td></tr>";
+        }
+      }
+      ?>
+    </tbody>
+
+    </table>
+
+    </div> <!-- End #tab1 -->      
+
+  </div> <!-- End .content-box-content -->
+
+</div> <!-- End .content-box -->  
+
+
+  <script type="text/javascript" src="/js/jquery.form.js"></script>
+  <script type="text/javascript" src="/js/admin/basemanage.js"></script>
+  <script type="text/javascript">
+    //上传图片
+$(".addimg").click(function(){
+  var content ='<div id="main"><div class="demo"><p></p><div class="add-btn"><span>添加图片（720*1135）</span><input id="fileupload" type="file" name="upfile" accept=".jpg,.gif,.png"></div><div class="progress"><span class="bar"></span><span class="percent">0%</span></div><div class="files"></div><input type="hidden" value=""></div></div>';
+  var dialog1 = artDialog({
+    title:'上传图片并选择所属板块',
+    content:content,
+    width:"200px"
+  });
+  var bar = $('.bar');
+  var percent = $('.percent');
+  var progress = $(".progress");
+  var files = $(".files");
+  var btn = $(".btn span");
+  $("#fileupload").wrap("<form id='myupload' action='/upload/upmid.php' method='post' enctype='multipart/form-data'></form>");
+    $("#fileupload").change(function(){
+    $("#myupload").ajaxSubmit({
+      dataType:  'json',
+      beforeSend: function() {
+        progress.show();
+        var percentVal = '0%';
+        bar.width(percentVal);
+        percent.html(percentVal);
+        btn.html("上传中...");
+        },
+        uploadProgress: function(event, position, total, percentComplete) {
+            var percentVal = percentComplete + '%';
+            bar.width(percentVal);
+            percent.html(percentVal);
+        },
+      success: function(data) {
+        if (data.status == 'success') {
+          btn.html("添加图片");
+          var dialog2 = artDialog({
+            title: '确认并选择所属板块',
+            left:"40%",
+            content: '<img height="500px" src="/upload/'+data.path+'" /><br><br><select class=\"img-module\"><option value=\" \">请选择板块</option><?php foreach ($this->arrModule as $key => $value) {
+                echo "<option value=\"".$value["module_id"]."\">".$value["module_name"]."</option>";
+              } ?></select>',
+              button: [
+              {
+                name: '不错，就这张了。',
+                callback: function () {
+                  var imgMid = $.trim($(".img-module").val());
+                  var img = data.name;var path = data.path;
+                  if (imgMid == '') {
+                    var dialog3 = artDialog({time:2,content:"请选择板块",icon:'error',lock:true});
+                    return false;
+                  }
+                  else {
+                    $.ajax({
+                      url:'/admin/basemanage/type/midImg',
+                      type:'post',
+                      data:{
+                        path:path,
+                        img:img,
+                        imgMid:imgMid
+                      },
+                      success:function(msg){
+                        if (msg == 'success') {
+                          var dialog3 = artDialog({time:2,content:"修改好了",icon:'success',lock:true});
+                          dialog2.close();
+                          window.location.reload();
+                        }
+                        else {
+                          var dialog3 = artDialog({time:2,content:"修改失败",icon:'error',lock:true});
+                          return false;
+                        }
+                      }
+                    });
+                    return false;
+                  }
+                },
+                focus: true
+              }
+              ]
+            });
+          dialog1.close();
+        }
+        else if(data.status == 'error'){
+          var dialog3 = artDialog({time:2,content:"请注意图片的尺寸",icon:'error',lock:true});
+          progress.hide();
+          btn.html("重新选择");
+          return false;
+        }
+      },
+      error:function(xhr){
+        btn.html("上传失败");
+        bar.width('0')
+        files.html(xhr.responseText);
+      }
+    });
+  });
+return false;
+});
+</script>

@@ -1,0 +1,253 @@
+<div class="content-box"><!-- Start Content Box -->
+
+  <div class="content-box-header">
+
+    <h3><?=$this->module_name;?></h3>
+
+    <ul class="content-box-tabs">
+      <li><a href="/admin/module/mid/<?php echo $this->module_id; ?>" title="所有文章" id="alltab" class="default-tab">所有文章</a></li>
+    </ul>
+
+    <div class="clear"></div>
+
+  </div> <!-- End .content-box-header -->
+
+  <div class="content-box-content">
+
+    <!-- 全部文章 -->
+    <div class="tab-content default-tab" id="all">
+
+      <table>
+
+      <?php
+       if ($this->module_type == 1) {//纯图片
+      ?>
+         <thead>
+
+           <tr>
+             <?php
+               if ($this->session->type == 1)
+                 echo "<th><input class=\"check-all\" type=\"checkbox\" /></th>";
+             ?>
+             <th>图片</th>
+             <th>上传时间</th>
+             <th>图片操作</th>
+           </tr>
+
+         </thead>
+
+         <tbody>
+
+           <?php
+             if ($this->paginator_articleinfo) {
+               foreach ($this->paginator_articleinfo as $key => $value) {
+                 echo "<tr>";
+                 if ($this->session->type == 1) {
+                   echo "<td><input type=\"checkbox\" value='".$value['id']."' /></td>";
+                 }
+                 echo "<td><img title=\"点击预览大图\" alt=\"点击预览大图\" class=\"view-img\" style=\"cursor:point;height:100px;\" src=\"".$value['path']."\"/></td>";
+                 echo "<td>".date("Y-m-d",$value['filetime'])."</td>";
+                 echo "<td><a href=\"#\" data-href='".$value['id']."' title=\"删除\" class=\"deleteimg\"><img src=\"/images/admin/icons/cross.png\" alt=\"删除\" /></a>";
+                 echo "</td>
+                 </tr>";
+               }
+             }
+             $paginator_all=$this->paginator_all;
+           ?>
+         
+         </tbody>
+      <?php
+       }else{
+      ?>
+        <thead>
+
+          <tr>
+            <?php
+              if ($this->session->type == 1)
+                echo "<th><input class=\"check-all\" type=\"checkbox\" /></th>";
+            ?>
+            <th>文章标题</th>
+            <th>发帖时间</th>
+            <th>来源</th>
+            <th>文章操作</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+
+          <?php
+            if ($this->paginator_articleinfo) {
+              foreach ($this->paginator_articleinfo as $key => $value) {
+                echo "<tr>";
+                if ($this->session->type == 1) {
+                  echo "<td><input type=\"checkbox\" value='".$value['id']."' /></td>";
+                }
+                echo "<td><a href='#'>".$value['title']."</a></td>";
+                echo "<td>".$value['addtime']."</td>
+                      <td>".$value['source']."</td>
+                      <td><!-- Icons -->";
+                      if ($this->session->type == 1) {
+                        echo "<a href=\"/admin/editarticle/aid/".$value['id']."\" title=\"编辑\"><img src=\"/images/admin/icons/pencil.png\" alt=\"编辑\" /></a>　";
+                        echo "　<a href=\"#\" data-href='".$value['id']."' title=\"删除\" class=\"delete\"><img src=\"/images/admin/icons/cross.png\" alt=\"删除\" /></a>";
+                      } else {
+                        echo "<a href=\"/admin/editarticle/id/".$value['id']."\" title=\"编辑\"><img src=\"/images/admin/icons/pencil.png\" alt=\"编辑\" /></a>";
+                      }
+                echo "</td>
+                </tr>";
+              }
+            }
+            $paginator_all=$this->paginator_all;
+          ?>
+        
+        </tbody>
+      <?php
+       }
+      ?>
+
+      <tfoot>
+        <tr>
+          <td colspan="6">
+            <div class="bulk-actions align-left">
+              <?php
+                if ($this->module_type == 1) 
+                  echo "<input type=\"submit\" class=\"button delAllImg\" value=\"删除\">";
+                else
+                  echo "<input type=\"submit\" class=\"button delAll\" value=\"删除\">";
+              ?>
+            </div>
+
+            <div class="pagination">
+              <?php
+                echo $this->paginationControl($this->paginator_articleinfo,
+                'Elastic',//页码样式 
+                'admin/pagination_control.phtml'//页码模板
+                );
+              ?>
+            </div> <!-- End .pagination -->
+            <div class="clear"></div>
+          </td>
+        </tr>
+      </tfoot>
+
+      </table>
+
+    </div> <!-- End #all -->
+
+
+  </div> <!-- End .content-box-content -->
+
+</div> <!-- End .content-box -->
+<script type="text/javascript" src="/js/admin/jquery.artDialog.js?skin=green"></script>
+<script type="text/javascript" src="/js/jquery.form.js"></script>
+<script type="text/javascript" src="/js/admin/article.js"></script>
+<script type="text/javascript">
+$(".view-img").click(function() {
+  var img = $(this).attr("src");
+  artDialog({
+    title: '图片查看',
+    content: '<img height="300px" src="'+img+'" />',
+    button: [
+    {
+            name: '关闭预览',
+            callback: function () {
+            },
+            focus: true
+        }
+        ]
+  });
+});
+  $(".writeimg").click(function(){
+    var content ='<div id="main"><div class="demo"><p></p><div class="add-btn"><span>添加图片（620*520）</span><input id="fileupload" type="file" name="upfile" accept=".jpg,.gif,.png"></div><div class="progress"><span class="bar"></span><span class="percent">0%</span></div><div class="files"></div><input type="hidden" value=""></div></div>';
+    var dialog1 = artDialog({
+      title:'上传图片并选择所属板块',
+      content:content,
+      width:"200px"
+    });
+    var bar = $('.bar');
+    var percent = $('.percent');
+    var progress = $(".progress");
+    var files = $(".files");
+    var btn = $(".btn span");
+    $("#fileupload").wrap("<form id='myupload' action='/upload/upmid.php' method='post' enctype='multipart/form-data'></form>");
+      $("#fileupload").change(function(){
+      $("#myupload").ajaxSubmit({
+        dataType:  'json',
+        beforeSend: function() {
+          progress.show();
+          var percentVal = '0%';
+          bar.width(percentVal);
+          percent.html(percentVal);
+          btn.html("上传中...");
+          },
+          uploadProgress: function(event, position, total, percentComplete) {
+              var percentVal = percentComplete + '%';
+              bar.width(percentVal);
+              percent.html(percentVal);
+          },
+        success: function(data) {
+          if (data.status == 'success') {
+            btn.html("添加图片");
+            var dialog2 = artDialog({
+              title: '确认并选择所属板块',
+              left:"40%",
+              content: '<img height="500px" src="/upload/'+data.path+'" /><br><br><select class=\"img-module\"><option value=\" \">请选择板块</option><?php foreach ($this->arrModule as $key => $value) {
+                  echo "<option value=\"".$value["module_id"]."\">".$value["module_name"]."</option>";
+                } ?></select>',
+                button: [
+                {
+                  name: '不错，就这张了。',
+                  callback: function () {
+                    var imgMid = $.trim($(".img-module").val());
+                    var img = data.name;var path = data.path;
+                    if (imgMid == '') {
+                      var dialog3 = artDialog({time:2,content:"请选择板块",icon:'error',lock:true});
+                      return false;
+                    }
+                    else {
+                      $.ajax({
+                        url:'/admin/writeimg',
+                        type:'post',
+                        data:{
+                          path:path,
+                          img:img,
+                          imgMid:imgMid
+                        },
+                        success:function(msg){
+                          if (msg == 'success') {
+                            var dialog3 = artDialog({time:2,content:"修改好了",icon:'success',lock:true});
+                            dialog2.close();
+                            window.location.reload();
+                          }
+                          else {
+                            var dialog3 = artDialog({time:2,content:"修改失败",icon:'error',lock:true});
+                            return false;
+                          }
+                        }
+                      });
+                      return false;
+                    }
+                  },
+                  focus: true
+                }
+                ]
+              });
+            dialog1.close();
+          }
+          else if(data.status == 'error'){
+            var dialog3 = artDialog({time:2,content:"请注意图片的尺寸",icon:'error',lock:true});
+            progress.hide();
+            btn.html("重新选择");
+            return false;
+          }
+        },
+        error:function(xhr){
+          btn.html("上传失败");
+          bar.width('0')
+          files.html(xhr.responseText);
+        }
+      });
+    });
+  return false;
+  });
+</script>
