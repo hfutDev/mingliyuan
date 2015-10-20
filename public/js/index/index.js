@@ -93,7 +93,7 @@ $(document).ready(function () {
     });
 
     $.each($('.fucked>.pin-head>ul>li'), function (index, item) {
-        $(item).click(function () {
+        $(item).hover(function () {
             $('.fucked>.pin-head>ul>li').removeClass('active');
             $(this).addClass('active');
             $('.fucked-img').removeClass('active');
@@ -102,7 +102,7 @@ $(document).ready(function () {
     });
 
     $.each($('.pin-head-1>ul>li'), function (index, item) {
-        $(item).click(function () {
+        $(item).hover(function () {
             $('.pin-head-1>ul>li').removeClass('active');
             $(this).addClass('active');
             $('.fuck1').removeClass('active');
@@ -111,11 +111,19 @@ $(document).ready(function () {
     });
 
     $.each($('.pin-head-2>ul>li'), function (index, item) {
-        $(item).click(function () {
+        $(item).hover(function () {
             $('.pin-head-2>ul>li').removeClass('active');
             $(this).addClass('active');
             $('.fuck2').removeClass('active');
             $('.fuck2').eq(index).addClass('active');
         });
     });
+
+    $.each($('.fuck-right'), function (index, item) {
+        $(item).hover(function () {
+            $(this).find('.opacity').addClass('active');
+        }, function () {
+            $(this).find('.opacity').removeClass('active');
+        });
+    })
 });
