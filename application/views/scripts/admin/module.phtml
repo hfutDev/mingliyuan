@@ -6,6 +6,7 @@
 
     <ul class="content-box-tabs">
       <li><a href="/admin/module/mid/<?php echo $this->module_id; ?>" title="所有文章" id="alltab" class="default-tab">所有文章</a></li>
+      <li><a href="/admin/module/type/1/mid/<?php echo $this->module_id; ?>" title="所有图片" id="alltab" class="default-tab">所有图片</a></li>
     </ul>
 
     <div class="clear"></div>
@@ -83,7 +84,7 @@
                 if ($this->session->type == 1) {
                   echo "<td><input type=\"checkbox\" value='".$value['id']."' /></td>";
                 }
-                echo "<td><a href='#'>".$value['title']."</a></td>";
+                echo "<td><a href='/index/article/aid/".$value['id']."' target=\"_blank\">".$value['title']."</a></td>";
                 echo "<td>".$value['addtime']."</td>
                       <td>".$value['source']."</td>
                       <td><!-- Icons -->";

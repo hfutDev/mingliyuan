@@ -64,9 +64,15 @@ class IndexController extends Zend_Controller_Action
     {
         $zixunMapper = new Application_Model_zixunMapper();
         @$keyword = trim($this->getRequest()->getParam('kw'));
-        $this->view->keyword = $keyword ? $keyword : "搜索结果";
+        $session = new Zend_Session_Namespace('search');
         
-        if (isset($keyword) && !empty($keyword)) {
+        if ((isset($keyword) && !empty($keyword)) || isset($session->keyword)) {
+            if ((isset($session->keyword) && $session->keyword == $keyword) || empty($keyword)) {
+                $keyword = $session->keyword;
+            }else{
+                $session->keyword = $keyword;
+            }
+            $this->view->keyword = $keyword ? $keyword : "搜索结果";
             $zixun = $zixunMapper->search($keyword);
             $num=20; $page=1;
             $paginator_articleinfo = new Zend_Paginator(new Zend_Paginator_Adapter_Array($zixun));

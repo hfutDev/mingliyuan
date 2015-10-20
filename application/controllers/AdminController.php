@@ -39,7 +39,8 @@ class AdminController extends Zend_Controller_Action
             $this->_redirect("/admin/myarticle");
             exit();
         }
-        $mid = $this->_request->getParam("mid");
+        $mid = trim($this->_request->getParam("mid"));
+        $type = trim($this->_request->getParam("type"));
         $moduleMapper = new Application_Model_moduleMapper();
         $zixunMapper = new Application_Model_zixunMapper();
         $albumMapper = new Application_Model_albumMapper();
@@ -53,8 +54,8 @@ class AdminController extends Zend_Controller_Action
         }
         $this->view->module_name = $module[0]['module_name'];
         $this->view->module_id = $module[0]['module_id'];
-        $this->view->module_type = $module[0]['module_type'];
-        if ($module[0]['module_type'] == 1) {
+        $this->view->module_type = $type;
+        if ($type == 1) {
             $album = $albumMapper->findByMid($mid);
             $num=10; $page=1;
             $paginator_articleinfo = new Zend_Paginator(new Zend_Paginator_Adapter_Array($album));
@@ -71,9 +72,6 @@ class AdminController extends Zend_Controller_Action
             $paginator_articleinfo->setCurrentPageNumber($this->_getParam('page'));
             $this->view->paginator_articleinfo = $paginator_articleinfo;
         }
-
-        $this->view->imgModule = $moduleMapper->getByType(1);
-        // exit();
     }
 
     //发布文章/修改文章//删除
