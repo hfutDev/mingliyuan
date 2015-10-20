@@ -30,6 +30,14 @@
     border-radius: 5px;
 }
 
+.pin-head > ul > li >a{
+    color: #000;
+}
+
+.pin-head > ul > li.active >a{
+    color: #fff;
+}
+
 .pin-head > ul > li.active > .angle {
     position: absolute;
     bottom: -6px;
@@ -73,8 +81,63 @@
 
 .fuck {
     width: 660px;
-    height: 200px;
-    margin: 20px 0;
+    height: 132px;
+    margin: 50px 0;
+    display: inline-block;
+}
+
+.fuck img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.fuck-left {
+    position: relative;
+    width: 132px;
+    height: 132px;
+    float: left;
+    display: inline-block;
+}
+
+.fuck-right {
+    position: relative;
+    width: 132px;
+    height: 66px;
+    float: right;
+    overflow: hidden;
+}
+
+.opacity {
+    width: 100%;
+    height: 26px;
+    overflow: hidden;
+    text-align: center;
+    display: inline-block;
+    position: absolute;
+    bottom: -26px;
+    transition: bottom .3s ease-in;
+    -o-transition: bottom .3s ease-in;
+    -ms-transition: bottom .3s ease-in;
+    -moz-transition: bottom .3s ease-in;
+    -webkit-transition: bottom .3s ease-in;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.opacity.active{
+    transition: bottom .3s ease-in;
+    -o-transition: bottom .3s ease-in;
+    -ms-transition: bottom .3s ease-in;
+    -moz-transition: bottom .3s ease-in;
+    -webkit-transition: bottom .3s ease-in;
+    bottom: 0;
+}
+
+.opacity > p {
+    color: #fff;
+    font-size: 14px;
+    line-height: 26px;
 }
 
 .ping {
