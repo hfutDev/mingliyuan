@@ -19,7 +19,7 @@
 
 
 .link-group ul li a{
-    width: 520px;
+    width: 500px;
     height: 36px;
     overflow: hidden;
     line-height: 36px;
@@ -29,7 +29,7 @@
 }
 
 .link-group ul li span{
-    width: 80px;
+    width: 100px;
     margin-left: 14px;
     height: 36px;
     line-height: 36px;
