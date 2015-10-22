@@ -8,7 +8,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
@@ -21,7 +21,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
@@ -34,7 +34,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
@@ -47,7 +47,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
@@ -60,7 +60,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
@@ -73,7 +73,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
@@ -86,7 +86,7 @@ $(document).ready(function () {
             tabTn: "a",
             conCn: '.fcon',
             auto: 1,
-            effect: 'scrollLeft',
+            effect: 'fade',
             eType: 'click',
             interval: 3000
         })
