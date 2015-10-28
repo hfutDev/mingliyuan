@@ -15,7 +15,7 @@ class IndexController extends Zend_Controller_Action
         $albumMapper = new Application_Model_albumMapper();
         $modules = $moduleMapper->findAll(0);
         for ($i=0; $i < count($modules); $i++) {
-            $modules[$i]['article'] = $zixunMapper->findByMidLimit($modules[$i]['module_id'],4);
+            $modules[$i]['article'] = $zixunMapper->findByMidLimit($modules[$i]['module_id'],6);
             $limit = 4;
             if ($i > 8) {
                 $limit = 5;
