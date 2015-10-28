@@ -90,9 +90,11 @@ body {
     width: 200px;
     height: 14px;
     padding: 6px 10px;
-    border-radius: 13px;
+    border-top-left-radius: 13px;
+    border-bottom-left-radius: 13px;
     outline: none;
     border: 1px solid #e5e5e5;
+    border-right: none;
 }
 
 .pingg {
@@ -256,4 +258,20 @@ body {
 .focus .D1fBt i {
     display: none;
     font-style: normal;
+}
+
+.search-btn{
+    width: 60px;
+    outline: none;
+    border: none;
+    background-color: #8c0000;
+    color: #fff;
+    font-size: 16px;
+    line-height: 16px;
+    padding: 6px 6px;
+    text-align: center;
+    margin-left: -3px;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    cursor: pointer;
 }
