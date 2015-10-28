@@ -1,1 +1,4 @@
-application.ini
+.idea
+library
+application/configs/application.ini
+public/index.php
